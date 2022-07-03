@@ -8,10 +8,10 @@ const btnMenuListarPacientes = document.querySelector("#btnMenuListarPacientes")
 const btnMenuCrearTurno = document.querySelector("#btnMenuCrearTurno")
 const btnMenuListarTurnos = document.querySelector("#btnMenuListarTurnos")
 const Menu = [
-{titulo:'Odontologo',accion:btnMenuCrearOdontologo, contenido:'crear Odontologo'},
-{titulo:'Paciente',accion:btnMenuCrearPaciente, contenido:'crear paciente'},
+{titulo:'Odontologo',accion:btnMenuCrearOdontologo, contenido:crearOdontologo},
+{titulo:'Paciente',accion:btnMenuCrearPaciente, contenido:crearPaciente},
 {titulo:'Turno',accion:btnMenuCrearTurno, contenido:crearTurno},
-{titulo:'Odontologo',accion:btnMenuListarOdontologos, contenido:'ver odontologos'},
-{titulo:'Paciente',accion:btnMenuListarPacientes, contenido:'ver pacientes'},
+{titulo:'Odontologo',accion:btnMenuListarOdontologos, contenido:verOdontologos},
+{titulo:'Paciente',accion:btnMenuListarPacientes, contenido:verPacientes},
 {titulo:'Turno',accion:btnMenuListarTurnos, contenido:verTurnos}
 ]
