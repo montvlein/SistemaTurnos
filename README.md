@@ -1,16 +1,35 @@
 # SistemaTurnos
+___
 
-# construir la imagen
-docker build -t turnera
+Proyecto final para la materia Backend 01 de la carrera Certifiqued
 
-# si surge un problema en el build con mvnw, limpiar 'los espacios en blanco' del archivo corriendo desde consola:
-# sed -i 's/\r$//' mvnw
+## SETUP
+___
+Las instrucciones son para construir y levantar el proyecto con Docker.
+Seguir las instrucciones parado sobre la ruta inicial del proyecto.
+ `$ cd ../[nombreProyecto]`
 
-# corriendo por primera vez el contenedor
-docker run -p 8080:8080 --name SistemaTurnos turnera
+### construir la imagen
 
-# para parar el contenedor
-docker container stop SistemaTurnos
+ ```bash
+ $ docker build -t turnera .
+ ```
 
-# para iniciar el contenedor
-docker container start SistemaTurnos
+#### posibles problemas
+si surge un problema en el build con mvnw, limpiar 'los espacios en blanco' del archivo corriendo desde consola:
+```bash
+$ sed -i 's/\r$//' mvnw
+```
+
+### corriendo por primera vez el contenedor
+```bash
+$ docker run -p 8080:8080 --name SistemaTurnos turnera
+```
+### Parar el contenedor
+```bash
+$ docker container stop SistemaTurnos
+```
+### Iniciar el contenedor
+```bash
+$ docker container start SistemaTurnos
+```
