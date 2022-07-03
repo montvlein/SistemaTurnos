@@ -11,7 +11,7 @@ function renderizarOpcion(opcion) {
     contenido.innerHTML = opcion.contenido
 }
 
-for (let item of Menu) {
+for (let item of menu) {
     item.accion.addEventListener('click', ()=>{
         renderizarOpcion(item)
     })
