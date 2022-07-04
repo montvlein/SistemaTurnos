@@ -47,7 +47,7 @@ public class PacienteService implements iServices<Paciente> {
     }
 
     public Paciente actualizar(Paciente paciente){
-        Paciente pacienteActualizar = paciente_repository.findById(paciente.getId()).get(); // Acá tengo al paciente A actualizar
+        Paciente pacienteActualizar = paciente_repository.findById(paciente.getId()).get();
         pacienteActualizar.setNombre(paciente.getNombre());
         pacienteActualizar.setApellido(paciente.getApellido());
         pacienteActualizar.setDni(paciente.getDni());
@@ -57,7 +57,6 @@ public class PacienteService implements iServices<Paciente> {
     }
 
     public List<Paciente> listarTodos() {
-        List<Paciente> result = paciente_repository.findAll();
-        return result;
+        return paciente_repository.findAll();
     }
 }

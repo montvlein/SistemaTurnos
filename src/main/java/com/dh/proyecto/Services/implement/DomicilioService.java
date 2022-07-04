@@ -49,7 +49,6 @@ public class DomicilioService implements iServices<Domicilio> {
     }
 
     public List<Domicilio> listarTodos() {
-        List<Domicilio> result = domicilio_repositoy.findAll();
-        return result;
+        return domicilio_repositoy.findAll();
     }
 }

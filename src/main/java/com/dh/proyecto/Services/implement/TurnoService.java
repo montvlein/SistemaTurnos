@@ -46,7 +46,6 @@ public class TurnoService implements iServices<Turno> {
     }
 
     public List<Turno> listarTodos() {
-        List<Turno> result = turno_repository.findAll();
-        return result;
+        return turno_repository.findAll();
     }
 }

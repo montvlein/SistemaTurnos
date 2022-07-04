@@ -44,12 +44,10 @@ public class OdontologoService implements iServices<Odontologo> {
     }
 
     public Odontologo buscar(Long id) {
-
         return odontologo_repository.findById(id).get();
     }
 
     public List<Odontologo> listarTodos() {
-        List<Odontologo> result = odontologo_repository.findAll();
-        return result;
+        return odontologo_repository.findAll();
     }
 }
