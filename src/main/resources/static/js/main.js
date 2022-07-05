@@ -8,6 +8,19 @@ function renderizarOpcion(opcion) {
     title.textContent = opcion.titulo
     accion.textContent = opcion.accion.textContent
     contenido.innerHTML = opcion.contenido
+    if (accion.textContent == "listar") {
+        switch (opcion.titulo) {
+            case "Odontólogo":
+                getOdontologos().then(tabla => contenido.innerHTML = tabla)
+                break
+            case "Paciente":
+                getPacientes().then(tabla => contenido.innerHTML = tabla)
+                break
+            case 'Turno':
+                getTurnos().then(tabla => contenido.innerHTML = tabla)
+                break
+        }
+    }
 }
 
 function habilitarBoton(titulo) {
