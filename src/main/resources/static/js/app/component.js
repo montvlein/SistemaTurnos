@@ -11,7 +11,7 @@ const menu = [
 {titulo:'Odontólogo',accion:btnMenuCrearOdontologo, contenido:form_crearOdontologo},
 {titulo:'Paciente',accion:btnMenuCrearPaciente, contenido:form_crearPaciente},
 {titulo:'Turno',accion:btnMenuCrearTurno, contenido:form_crearTurno},
-{titulo:'Odontologo',accion:btnMenuListarOdontologos, contenido:verOdontologos},
+{titulo:'Odontólogo',accion:btnMenuListarOdontologos, contenido:verOdontologos},
 {titulo:'Paciente',accion:btnMenuListarPacientes, contenido:verPacientes},
 {titulo:'Turno',accion:btnMenuListarTurnos, contenido:verTurnos}
 ]
