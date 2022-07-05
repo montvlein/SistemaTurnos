@@ -1,6 +1,7 @@
 package com.dh.proyecto.Services.implement;
 
 
+import com.dh.proyecto.Exceptions.BadRequestException;
 import com.dh.proyecto.Models.entities.Odontologo;
 import com.dh.proyecto.Repository.ORM.iOdontologo_repository;
 import com.dh.proyecto.Services.iServices;
@@ -21,7 +22,7 @@ public class OdontologoService implements iServices<Odontologo> {
         this.odontologo_repository = odontologo_repository;
     }
 
-    public boolean guardar(Odontologo odoncito) {
+    public boolean guardar(Odontologo odoncito) throws Exception {
         boolean res = false;
         try {
             odontologo_repository.save(odoncito);

@@ -1,5 +1,6 @@
 package com.dh.proyecto.Services.implement;
 
+import com.dh.proyecto.Exceptions.BadRequestException;
 import com.dh.proyecto.Models.entities.Paciente;
 import com.dh.proyecto.Repository.ORM.iPaciente_repository;
 import com.dh.proyecto.Services.iServices;
@@ -20,7 +21,7 @@ public class PacienteService implements iServices<Paciente> {
         this.paciente_repository = paciente_repository;
     }
 
-    public boolean guardar(Paciente paz) {
+    public boolean guardar(Paciente paz) throws Exception {
         boolean res = false;
         try {
             paciente_repository.save(paz);
@@ -48,7 +49,7 @@ public class PacienteService implements iServices<Paciente> {
         return p;
     }
 
-    public Paciente actualizar(Paciente paciente){
+    public Paciente actualizar(Paciente paciente) throws Exception{
         Paciente pacienteActualizar = buscar(paciente.getId());
         if (pacienteActualizar!= null) {
             pacienteActualizar.setNombre(paciente.getNombre());

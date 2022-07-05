@@ -20,7 +20,7 @@ public class OdontologoController {
     }
 
     @PostMapping
-    public ResponseEntity registar(@RequestBody Odontologo o) {
+    public ResponseEntity registar(@RequestBody Odontologo o) throws Exception {
         return ResponseEntity.ok(services.guardar(o));
     }
 

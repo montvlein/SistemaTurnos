@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface iServices<T> {
 
-    boolean guardar(T t);
+    boolean guardar(T t) throws Exception;
 
     boolean eliminar(Long id);
 

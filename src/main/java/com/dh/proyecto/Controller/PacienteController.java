@@ -21,7 +21,7 @@ public class PacienteController {
     }
 
     @PostMapping
-    public ResponseEntity registar(@RequestBody Paciente p) {
+    public ResponseEntity registar(@RequestBody Paciente p) throws Exception{
         return ResponseEntity.ok(services.guardar(p));
     }
 
@@ -37,7 +37,7 @@ public class PacienteController {
     }
 
     @PutMapping
-    public ResponseEntity<Paciente> actualizarRegistro(@RequestBody Paciente paciente){
+    public ResponseEntity<Paciente> actualizarRegistro(@RequestBody Paciente paciente) throws Exception{
         ResponseEntity<Paciente> response = ResponseEntity.notFound().build();
         if(paciente.getId() != null && services.buscar(paciente.getId()) != null){
             // Este lo busca en el body (Si le estan mandado por postman) && este lo busca en el com.odontologica.proyectfinal.repository

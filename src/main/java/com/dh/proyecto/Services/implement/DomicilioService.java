@@ -1,6 +1,7 @@
 package com.dh.proyecto.Services.implement;
 
 
+import com.dh.proyecto.Exceptions.BadRequestException;
 import com.dh.proyecto.Models.entities.Domicilio;
 import com.dh.proyecto.Repository.ORM.iDomicilio_repository;
 import com.dh.proyecto.Services.iServices;
@@ -22,7 +23,7 @@ public class DomicilioService implements iServices<Domicilio> {
         this.domicilio_repositoy = domicilio_repositoy;
     }
 
-    public boolean guardar(Domicilio dom) {
+    public boolean guardar(Domicilio dom) throws Exception {
         boolean res = false;
         try {
             domicilio_repositoy.save(dom);
