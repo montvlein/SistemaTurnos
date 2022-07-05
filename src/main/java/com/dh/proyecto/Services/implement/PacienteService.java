@@ -43,16 +43,20 @@ public class PacienteService implements iServices<Paciente> {
     }
 
     public Paciente buscar(Long id) {
-        return paciente_repository.findById(id).get();
+        Paciente p = null;
+        if (paciente_repository.findById(id).isPresent()) p = paciente_repository.findById(id).get();
+        return p;
     }
 
     public Paciente actualizar(Paciente paciente){
-        Paciente pacienteActualizar = paciente_repository.findById(paciente.getId()).get();
-        pacienteActualizar.setNombre(paciente.getNombre());
-        pacienteActualizar.setApellido(paciente.getApellido());
-        pacienteActualizar.setDni(paciente.getDni());
-        pacienteActualizar.setFechaIngreso(paciente.getFechaIngreso());
-        guardar(pacienteActualizar);
+        Paciente pacienteActualizar = buscar(paciente.getId());
+        if (pacienteActualizar!= null) {
+            pacienteActualizar.setNombre(paciente.getNombre());
+            pacienteActualizar.setApellido(paciente.getApellido());
+            pacienteActualizar.setDni(paciente.getDni());
+            pacienteActualizar.setFechaIngreso(paciente.getFechaIngreso());
+            guardar(pacienteActualizar);
+        }
         return paciente;
     }
 

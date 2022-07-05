@@ -44,7 +44,9 @@ public class OdontologoService implements iServices<Odontologo> {
     }
 
     public Odontologo buscar(Long id) {
-        return odontologo_repository.findById(id).get();
+        Odontologo o = null;
+        if (odontologo_repository.findById(id).isPresent()) o = odontologo_repository.findById(id).get();
+        return o;
     }
 
     public List<Odontologo> listarTodos() {
