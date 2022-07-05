@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.websocket.server.PathParam;
+
 @RestController
 @RequestMapping("v1/paciente")
 public class PacienteController {
@@ -16,7 +18,7 @@ public class PacienteController {
 
     @Autowired
     @Qualifier("paciente_services")
-    public void setServices(iServices services) {
+    public void setServices(iServices<Paciente> services) {
         this.services = services;
     }
 
@@ -49,6 +51,11 @@ public class PacienteController {
     @GetMapping("all")
     public ResponseEntity listarTodos() {
         return ResponseEntity.ok(services.listarTodos());
+    }
+
+    @GetMapping("/")
+    public ResponseEntity listarPorNombre(@RequestParam String nombre) {
+        return ResponseEntity.ok(((PacienteService)services).buscarPorNombre(nombre));
     }
 
 }

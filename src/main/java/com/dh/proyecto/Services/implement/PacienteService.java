@@ -64,4 +64,8 @@ public class PacienteService implements iServices<Paciente> {
     public List<Paciente> listarTodos() {
         return paciente_repository.findAll();
     }
+
+    public List<Paciente> buscarPorNombre(String nombre) {
+        return paciente_repository.findPacienteByName(nombre);
+    }
 }
