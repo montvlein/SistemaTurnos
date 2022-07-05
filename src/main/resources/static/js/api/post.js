@@ -2,7 +2,6 @@ async function crearPaciente(paciente) {
     return fetch("v1/paciente", {method:'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(paciente)})
     .then(response => response.json())
     .then(data => {
-        console.log(data)
         return data
         })
 }
@@ -14,7 +13,6 @@ async function crearOdontologo(odontologo) {
         body: JSON.stringify(odontologo)})
     .then(response => response.json())
     .then(data => {
-        console.log(data)
         return data
         })
 }
@@ -26,7 +24,6 @@ async function crearTurno(turno) {
         body: JSON.stringify(turno)})
     .then(response => response.json())
     .then(data => {
-        console.log(data)
         return data
         })
 }
