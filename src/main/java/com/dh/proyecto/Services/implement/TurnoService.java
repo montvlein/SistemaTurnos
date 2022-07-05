@@ -62,7 +62,9 @@ public class TurnoService implements iServices<Turno> {
     }
 
     public Turno buscar(Long id) {
-        return turno_repository.findById(id).get();
+        Turno t = null;
+        if (turno_repository.findById(id).isPresent()) t = turno_repository.findById(id).get();
+        return t;
     }
 
     public List<Turno> listarTodos() {
