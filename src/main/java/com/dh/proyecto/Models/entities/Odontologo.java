@@ -21,4 +21,14 @@ public class Odontologo {
     @JsonIgnore
     private Set<Turno> turnos;
 
+    @Override
+    public String toString() {
+        return "Odontologo{" +
+                "id=" + id +
+                ", matricula='" + matricula + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", apellido='" + apellido + '\'' +
+                ", turnos=" + turnos +
+                '}';
+    }
 }

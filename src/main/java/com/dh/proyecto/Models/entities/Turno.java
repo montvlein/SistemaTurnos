@@ -24,4 +24,13 @@ public class Turno {
     @JoinColumn(name = "odontologo_id", nullable = false)
     private Odontologo odontologo;
 
+    @Override
+    public String toString() {
+        return "Turno{" +
+                "id=" + id +
+                ", fecha_y_hora=" + fecha_y_hora +
+                ", paciente=" + paciente +
+                ", odontologo=" + odontologo +
+                '}';
+    }
 }
