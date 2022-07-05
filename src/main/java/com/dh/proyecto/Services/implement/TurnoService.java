@@ -38,18 +38,7 @@ public class TurnoService implements iServices<Turno> {
         this.odontologoServices = odontologo_services;
     }
 
-    public boolean guardar(Turno paz) throws BadRequestException {
-        boolean res = false;
-        try {
-            turno_repository.save(paz);
-            res = true;
-        } catch (Exception e) {
-            logger.error(e);
-        }
-        return res;
-    }
-
-    public boolean guardarTurno(Turno turno) throws BadRequestException {
+    public boolean guardar(Turno turno) throws BadRequestException {
         boolean res = false;
         if (pacienteServices.buscar(turno.getPaciente().getId()) == null || odontologoServices.buscar(turno.getOdontologo().getId()) == null) throw new BadRequestException("mensaje de BadRequest");
         try {

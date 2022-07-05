@@ -21,26 +21,25 @@ public class TurnoController {
 
     @Autowired
     @Qualifier("turno_services")
-    public void setServices(iServices services) {
+    public void setServices(iServices<Turno> services) {
         this.services = services;
     }
 
     @PostMapping
-    public ResponseEntity registar(@RequestBody Turno t) throws BadRequestException {
+    public ResponseEntity registar(@RequestBody Turno t) {
         ResponseEntity respuesta = null;
         Paciente paciente_a_atender = t.getPaciente();
         Odontologo dentista = t.getOdontologo();
         if (paciente_a_atender.getId() == null
                 || dentista.getId() == null) respuesta = ResponseEntity.badRequest().body("no se selecciono paciente u odontologo");
-//        if (services.guardar(t)) {
-//            respuesta = ResponseEntity.ok().build();
-//        }
         try {
-            boolean respuesta_despues_guardar = ((TurnoService)services).guardarTurno(t);
+            boolean respuesta_despues_guardar = services.guardar(t);
             respuesta = ResponseEntity.ok(respuesta_despues_guardar);
         } catch (BadRequestException e){
             logger.info(e);
-            respuesta = ResponseEntity.badRequest().body("bad request desde el metodo");
+            respuesta = ResponseEntity.badRequest().body("usuario u odontologo no existe en la base de datos");
+        } catch (Exception e) {
+            logger.info(e);
         }
         return respuesta;
     }
