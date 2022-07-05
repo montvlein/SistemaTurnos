@@ -10,4 +10,5 @@ public class PacienteDTO {
     private String apellido;
     private String nombre;
     private String dni;
+    private String domicilio;
 }
