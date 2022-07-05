@@ -1,4 +1,4 @@
-const verOdontologos = `<table class="table table-hover w-100">
+const verOdontologos = `<table class="table table-hover">
               <thead>
               <tr>
                 <th scope="col">Id</th>
@@ -11,9 +11,9 @@ const verOdontologos = `<table class="table table-hover w-100">
               <tbody>
               <tr>
                 <th scope="row"><strong>Loading...</strong></th>
-                <td class="spinner-border ms-auto" role="status" aria-hidden="true"></td>
-                <td class="spinner-border ms-auto" role="status" aria-hidden="true"></td>
-                <td class="spinner-border ms-auto" role="status" aria-hidden="true"></td>
+                <td><div class="spinner-border ms-auto" role="status" aria-hidden="true"></div></td>
+                <td><div class="spinner-border ms-auto" role="status" aria-hidden="true"></div></td>
+                <td><div class="spinner-border ms-auto" role="status" aria-hidden="true"></div></td>
                 <td>
                   <button class="btn btn-primary" type="button" disabled>
                     <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
