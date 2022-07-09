@@ -1,16 +1,20 @@
 package com.dh.proyecto.Controller;
 
 import com.dh.proyecto.Exceptions.BadRequestException;
+import com.dh.proyecto.Models.dtos.TurnoDTO;
 import com.dh.proyecto.Models.entities.Odontologo;
 import com.dh.proyecto.Models.entities.Paciente;
 import com.dh.proyecto.Models.entities.Turno;
 import com.dh.proyecto.Services.iServices;
-import com.dh.proyecto.Services.implement.TurnoService;
+import com.dh.proyecto.Util.ModelMapperConfig;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("v1/turno")
@@ -57,7 +61,17 @@ public class TurnoController {
 
     @GetMapping("all")
     public ResponseEntity listarTodos() {
-        return ResponseEntity.ok(services.listarTodos());
+        List<Turno> listaTurnos = services.listarTodos();
+        List<TurnoDTO> listaRespuesta = new ArrayList<>();
+        for (Turno t:listaTurnos) {
+            TurnoDTO tDTO = new TurnoDTO();
+            tDTO.setFecha(t.getFecha_y_hora().getDayOfMonth() + "/" + t.getFecha_y_hora().getMonthValue() + "/" + t.getFecha_y_hora().getYear());
+            tDTO.setHora(t.getFecha_y_hora().getHour() + ":" + t.getFecha_y_hora().getMinute());
+            tDTO.setOdontologo(t.getOdontologo().getApellido() + ", " + t.getOdontologo().getNombre());
+            tDTO.setPaciente(t.getPaciente().getApellido() + ", " + t.getPaciente().getNombre());
+            listaRespuesta.add(tDTO);
+        }
+        return ResponseEntity.ok(listaRespuesta);
     }
 
 }
