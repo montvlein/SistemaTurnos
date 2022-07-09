@@ -8,8 +8,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.websocket.server.PathParam;
-
 @RestController
 @RequestMapping("v1/paciente")
 public class PacienteController {
@@ -42,7 +40,6 @@ public class PacienteController {
     public ResponseEntity<Paciente> actualizarRegistro(@RequestBody Paciente paciente) throws Exception{
         ResponseEntity<Paciente> response = ResponseEntity.notFound().build();
         if(paciente.getId() != null && services.buscar(paciente.getId()) != null){
-            // Este lo busca en el body (Si le estan mandado por postman) && este lo busca en el com.odontologica.proyectfinal.repository
             response = ResponseEntity.ok(((PacienteService)services).actualizar(paciente));
         }
         return response;
