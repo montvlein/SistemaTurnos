@@ -69,18 +69,18 @@ function getTurnos() {
         let cargarFilaTurno = "";
         for (let turno of lista){
         cargarFilaTurno += `<tr>
-                                        <th scope="row">${turno.id}</th>
-                                        <td>${turno.fecha}</td>
+                                        <th scope="row">${turno.fecha}</th>
+                                        <td>${turno.hora}</td>
                                         <td>${turno.paciente}</td>
                                         <td>${turno.odontologo}</td>
-                                        <td><button class="btn btn-primary me-1">Actualizar</button><button class="btn btn-primary">Eliminar</button></td>
+                                        <td><button class="btn btn-primary">Eliminar</button></td>
                                   </tr>`
         }
         return  `<table class="table table-hover">
         <thead>
         <tr>
-            <th scope="col">Id</th>
             <th scope="col">Fecha</th>
+            <th scope="col">Hora</th>
             <th scope="col">Paciente</th>
             <th scope="col">Odontologo</th>
             <th scope="col">Acción</th>
