@@ -1,7 +1,7 @@
 # SistemaTurnos
 ___
 
-Proyecto final para la materia Backend 01 de la carrera Certifiqued
+Proyecto final para la materia Backend 01 de la carrera Certified Tech Developer
 
 ## SETUP
 ___
