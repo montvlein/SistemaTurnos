@@ -35,15 +35,18 @@ public class TurnoController {
         Paciente paciente_a_atender = t.getPaciente();
         Odontologo dentista = t.getOdontologo();
         if (paciente_a_atender.getId() == null
-                || dentista.getId() == null) respuesta = ResponseEntity.badRequest().body("no se selecciono paciente u odontologo");
+                || dentista.getId() == null
+                || t.getFecha_y_hora() == null
+        ) respuesta = ResponseEntity.badRequest().body("no se selecciono paciente, odontologo o turno");
         try {
             boolean respuesta_despues_guardar = services.guardar(t);
             respuesta = ResponseEntity.ok(respuesta_despues_guardar);
         } catch (BadRequestException e){
             logger.info(e);
-            respuesta = ResponseEntity.badRequest().body("usuario u odontologo no existe en la base de datos");
+            respuesta = ResponseEntity.badRequest().body(e.getMessage());
         } catch (Exception e) {
             logger.info(e);
+            respuesta = ResponseEntity.badRequest().body(e.getMessage());
         }
         return respuesta;
     }
