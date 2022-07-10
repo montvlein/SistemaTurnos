@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service("turno_services")
@@ -40,7 +41,9 @@ public class TurnoService implements iServices<Turno> {
 
     public boolean guardar(Turno turno) throws BadRequestException {
         boolean res = false;
-        if (pacienteServices.buscar(turno.getPaciente().getId()) == null || odontologoServices.buscar(turno.getOdontologo().getId()) == null) throw new BadRequestException("mensaje de BadRequest");
+        if (pacienteServices.buscar(turno.getPaciente().getId()) == null) throw new BadRequestException("No existe paciente en la base de datos");
+        if (odontologoServices.buscar(turno.getOdontologo().getId()) == null) throw new BadRequestException("No existe odontologo en la base de datos");
+        if (!isTurnoAvailable(turno)) throw new BadRequestException("Ya existe turno registrado para el odontologo seleccionado en la fecha y hora seleccionada");
         try {
             turno_repository.save(turno);
             res = true;
@@ -69,5 +72,30 @@ public class TurnoService implements iServices<Turno> {
 
     public List<Turno> listarTodos() {
         return turno_repository.findAll();
+    }
+
+    public boolean isTurnoAvailable(Turno t) {
+        boolean res = true;
+        Odontologo odontologo = odontologoServices.buscar(t.getOdontologo().getId());
+        for (Turno turno_reservado:odontologo.getTurnos()) {
+            if (t.getFecha_y_hora().equals(turno_reservado.getFecha_y_hora())) {
+                res = false;
+                break;
+            }
+        }
+        return res;
+    }
+    public boolean isTurnoAvailable(Odontologo o, LocalDateTime t) {
+        boolean res = true;
+        Odontologo odontologo = odontologoServices.buscar(o.getId());
+        if (odontologo != null) {
+            for (Turno turno_reservado:odontologo.getTurnos()) {
+                if (t.equals(turno_reservado.getFecha_y_hora())) {
+                    res = false;
+                    break;
+                }
+            }
+        }
+        return res;
     }
 }
