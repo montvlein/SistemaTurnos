@@ -1,6 +1,7 @@
 package com.dh.proyecto.Services.implement;
 
 import com.dh.proyecto.Exceptions.BadRequestException;
+import com.dh.proyecto.Exceptions.NotFoundException;
 import com.dh.proyecto.Models.entities.Odontologo;
 import com.dh.proyecto.Models.entities.Paciente;
 import com.dh.proyecto.Models.entities.Turno;
@@ -39,10 +40,10 @@ public class TurnoService implements iServices<Turno> {
         this.odontologoServices = odontologo_services;
     }
 
-    public boolean guardar(Turno turno) throws BadRequestException {
+    public boolean guardar(Turno turno) throws BadRequestException, NotFoundException {
         boolean res = false;
-        if (pacienteServices.buscar(turno.getPaciente().getId()) == null) throw new BadRequestException("No existe paciente en la base de datos");
-        if (odontologoServices.buscar(turno.getOdontologo().getId()) == null) throw new BadRequestException("No existe odontologo en la base de datos");
+        if (pacienteServices.buscar(turno.getPaciente().getId()) == null) throw new NotFoundException("No existe paciente en la base de datos");
+        if (odontologoServices.buscar(turno.getOdontologo().getId()) == null) throw new NotFoundException("No existe odontologo en la base de datos");
         if (!isTurnoAvailable(turno)) throw new BadRequestException("Ya existe turno registrado para el odontologo seleccionado en la fecha y hora seleccionada");
         try {
             turno_repository.save(turno);
