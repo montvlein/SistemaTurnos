@@ -1,13 +1,11 @@
 package com.dh.proyecto.Controller;
 
-import com.dh.proyecto.Exceptions.BadRequestException;
 import com.dh.proyecto.Exceptions.NotFoundException;
 import com.dh.proyecto.Models.dtos.TurnoDTO;
 import com.dh.proyecto.Models.entities.Odontologo;
 import com.dh.proyecto.Models.entities.Paciente;
 import com.dh.proyecto.Models.entities.Turno;
 import com.dh.proyecto.Services.iServices;
-import com.dh.proyecto.Services.implement.TurnoService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -44,12 +42,15 @@ public class TurnoController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<?> buscar(@PathVariable Long id) {
-        return ResponseEntity.ok(services.buscar(id));
+    public ResponseEntity<?> buscar(@PathVariable Long id) throws Exception {
+        Turno t = services.buscar(id);
+        if (t == null) throw new NotFoundException("no existe turno con ese ID");
+        return ResponseEntity.ok(t);
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<?> eliminar(@PathVariable Long id) {
+    public ResponseEntity<?> eliminar(@PathVariable Long id) throws Exception {
+        if (services.buscar(id) == null) throw new NotFoundException("no existe turno con ese ID");
         services.eliminar(id);
         return ResponseEntity.noContent().build();
     }
