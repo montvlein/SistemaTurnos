@@ -21,17 +21,17 @@ public class PacienteController {
     }
 
     @PostMapping
-    public ResponseEntity registar(@RequestBody Paciente p) throws Exception{
+    public ResponseEntity<?> registar(@RequestBody Paciente p) throws Exception{
         return ResponseEntity.ok(services.guardar(p));
     }
 
     @GetMapping("{id}")
-    public ResponseEntity buscar(@PathVariable Long id) {
+    public ResponseEntity<?> buscar(@PathVariable Long id) {
         return ResponseEntity.ok(services.buscar(id));
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity eliminar(@PathVariable Long id) {
+    public ResponseEntity<?> eliminar(@PathVariable Long id) {
         services.eliminar(id);
         return ResponseEntity.noContent().build();
     }
@@ -46,12 +46,12 @@ public class PacienteController {
     }
 
     @GetMapping("all")
-    public ResponseEntity listarTodos() {
+    public ResponseEntity<?> listarTodos() {
         return ResponseEntity.ok(services.listarTodos());
     }
 
     @GetMapping("/")
-    public ResponseEntity listarPorNombre(@RequestParam String nombre) {
+    public ResponseEntity<?> listarPorNombre(@RequestParam String nombre) {
         return ResponseEntity.ok(((PacienteService)services).buscarPorNombre(nombre));
     }
 

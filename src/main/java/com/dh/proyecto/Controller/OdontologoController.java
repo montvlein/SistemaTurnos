@@ -15,28 +15,28 @@ public class OdontologoController {
 
     @Autowired
     @Qualifier("odontologo_services")
-    public void setServices(iServices services) {
+    public void setServices(iServices<Odontologo> services) {
         this.services = services;
     }
 
     @PostMapping
-    public ResponseEntity registar(@RequestBody Odontologo o) throws Exception {
+    public ResponseEntity<?> registar(@RequestBody Odontologo o) throws Exception {
         return ResponseEntity.ok(services.guardar(o));
     }
 
     @GetMapping("{id}")
-    public ResponseEntity buscar(@PathVariable Long id) {
+    public ResponseEntity<?> buscar(@PathVariable Long id) {
         return ResponseEntity.ok(services.buscar(id));
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity eliminar(@PathVariable Long id) {
+    public ResponseEntity<?> eliminar(@PathVariable Long id) {
         services.eliminar(id);
         return ResponseEntity.noContent().build();
     }
 
     @GetMapping("all")
-    public ResponseEntity listarTodos() {
+    public ResponseEntity<?> listarTodos() {
         return ResponseEntity.ok(services.listarTodos());
     }
 
