@@ -4,6 +4,7 @@ import com.dh.proyecto.Models.entities.Odontologo;
 import com.dh.proyecto.Services.iServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,8 +32,7 @@ public class OdontologoController {
 
     @DeleteMapping("{id}")
     public ResponseEntity<?> eliminar(@PathVariable Long id) {
-        services.eliminar(id);
-        return ResponseEntity.noContent().build();
+        return new ResponseEntity(services.eliminar(id), HttpStatus.NO_CONTENT);
     }
 
     @GetMapping("all")
