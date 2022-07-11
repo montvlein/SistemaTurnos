@@ -1,17 +1,20 @@
 package com.dh.proyecto.Controller;
 
 import com.dh.proyecto.Exceptions.BadRequestException;
+import com.dh.proyecto.Exceptions.NotFoundException;
 import com.dh.proyecto.Models.dtos.TurnoDTO;
 import com.dh.proyecto.Models.entities.Odontologo;
 import com.dh.proyecto.Models.entities.Paciente;
 import com.dh.proyecto.Models.entities.Turno;
 import com.dh.proyecto.Services.iServices;
+import com.dh.proyecto.Services.implement.TurnoService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,40 +32,30 @@ public class TurnoController {
     }
 
     @PostMapping
-    public ResponseEntity registar(@RequestBody Turno t) {
-        ResponseEntity respuesta = null;
+    public ResponseEntity<?> registar(@RequestBody Turno t) throws Exception {
+        ResponseEntity<?> respuesta;
         Paciente paciente_a_atender = t.getPaciente();
         Odontologo dentista = t.getOdontologo();
-        if (paciente_a_atender.getId() == null
-                || dentista.getId() == null
-                || t.getFecha_y_hora() == null
-        ) respuesta = ResponseEntity.badRequest().body("no se selecciono paciente, odontologo o turno");
-        try {
-            boolean respuesta_despues_guardar = services.guardar(t);
-            respuesta = ResponseEntity.ok(respuesta_despues_guardar);
-        } catch (BadRequestException e){
-            logger.info(e);
-            respuesta = ResponseEntity.badRequest().body(e.getMessage());
-        } catch (Exception e) {
-            logger.info(e);
-            respuesta = ResponseEntity.badRequest().body(e.getMessage());
-        }
+        if (paciente_a_atender.getId() == null) { respuesta = ResponseEntity.badRequest().body("no se selecciono paciente"); }
+        else if (dentista.getId() == null) { respuesta = ResponseEntity.badRequest().body("no se selecciono paciente u odontologo"); }
+        else if (t.getFecha_y_hora().isBefore(LocalDateTime.now())) { respuesta = ResponseEntity.badRequest().body("el turno debe ser posterior a la fecha y hora actual"); }
+        else { respuesta = ResponseEntity.ok(services.guardar(t)); }
         return respuesta;
     }
 
     @GetMapping("{id}")
-    public ResponseEntity buscar(@PathVariable Long id) {
+    public ResponseEntity<?> buscar(@PathVariable Long id) {
         return ResponseEntity.ok(services.buscar(id));
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity eliminar(@PathVariable Long id) {
+    public ResponseEntity<?> eliminar(@PathVariable Long id) {
         services.eliminar(id);
         return ResponseEntity.noContent().build();
     }
 
     @GetMapping("all")
-    public ResponseEntity listarTodos() {
+    public ResponseEntity<?> listarTodos() {
         List<Turno> listaTurnos = services.listarTodos();
         List<TurnoDTO> listaRespuesta = new ArrayList<>();
         for (Turno t:listaTurnos) {
