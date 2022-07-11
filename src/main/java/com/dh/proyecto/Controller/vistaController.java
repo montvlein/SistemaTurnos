@@ -9,7 +9,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class vistaController {
 
     @GetMapping
-    public String renderVista() {
+    public String renderIndex() {
         return "index";
+    }
+
+    @GetMapping("user")
+    public String renderUser() {
+        return "user";
+    }
+
+    @GetMapping("admin")
+    public String renderAdmin() {
+        return "admin";
     }
 }
