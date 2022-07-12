@@ -39,13 +39,6 @@ public class Seguridad {
                 .authenticated()
 
                 .and().formLogin()
-                .defaultSuccessUrl("/success") //si se pone el segundo parametro en true entonces siempre carga segun los valores del rol
-                // pero para admin siempre carga la vista de admin, aunque se entre desde el link de user
-                // si no se pone el segundo parametro, entonces al entrar desde los path /admin o /user entonces pide
-                // hacer un loggin pero tira una respuesta 403... y si desde el menu de inicio se va directo a /login
-                // entonecs dependiendo si el usuario tiene rol de admin o user va a la web correspondiente
-                // porque el metodo 'rederPorRol' denderiza la web segun el rol... pero no quiere decir que tengan
-                // autorizacion para entrar a su path correspondiente...
                 .and().logout();
 
         return http.build();

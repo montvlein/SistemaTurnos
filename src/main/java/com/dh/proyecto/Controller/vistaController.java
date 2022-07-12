@@ -32,18 +32,4 @@ public class vistaController {
         return "admin";
     }
 
-    @GetMapping("success")
-    public String rederPorRol(Authentication authResult) {
-        String rol = authResult.getAuthorities().toString();
-        String render;
-        logger.info(rol);
-        if (rol.contains("ADMIN")) {
-            render = "admin";
-        } else if (rol.contains("USER")) {
-            render = "user";
-        } else {
-            render = "/";
-        }
-        return render;
-    }
 }
